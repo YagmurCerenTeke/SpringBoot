@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "JobPositions")
-public class JobPositions {
+public class JobPosition {
 
 	@Id
 	@GeneratedValue
@@ -19,11 +19,10 @@ public class JobPositions {
 	private int id;
 
 	@Column(name = "name")
-	private String firstName;
+	private String name;
 
 	@Column(name = "details")
-	private String lastName;
-	
+	private String details;
 	
 	@Column(name = "employerId")
 	private int employerId;
