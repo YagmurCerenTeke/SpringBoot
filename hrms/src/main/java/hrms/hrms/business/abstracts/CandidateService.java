@@ -2,14 +2,16 @@ package hrms.hrms.business.abstracts;
 
 import java.util.List;
 
+import hrms.hrms.core.utilities.results.DataResult;
+import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.entities.concretes.Candidate;
 
 
 public interface CandidateService {
 
-	List<Candidate> getAll();
+	DataResult<List<Candidate>> getAll();
 	
-	void add(Candidate candidate);
+	Result add(Candidate candidate);
 	
 	boolean duplicateCheck(Candidate candidate);
 	

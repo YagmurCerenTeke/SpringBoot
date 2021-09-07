@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 import hrms.hrms.business.abstracts.CandidateService;
 import hrms.hrms.dataAccess.abstracts.CandidateDao;
 import hrms.hrms.entities.concretes.Candidate;
-import hrms.hrms.business.concretes.MernisKpsServiceAdapter;
+import hrms.hrms.core.utilities.results.DataResult;
+import hrms.hrms.core.utilities.results.ErrorResult;
+import hrms.hrms.core.utilities.results.Result;
+import hrms.hrms.core.utilities.results.SuccessDataResult;
+import hrms.hrms.core.utilities.results.SuccessResult;
 
 @Service
 public class CandidateManager implements CandidateService {
@@ -24,22 +28,24 @@ public class CandidateManager implements CandidateService {
 	}
 
 	@Override
-	public List<Candidate> getAll() {
-		return candidateDao.findAll();
+	public DataResult<List<Candidate>> getAll() {
+		return new SuccessDataResult<List<Candidate>>
+		(this.candidateDao.findAll(),"Candidates listed.");
 	}
 
 	@Override
-	public void add(Candidate candidate) {
+	public Result add(Candidate candidate) {
 		if (mernisKpsServiceAdapter.isValid(candidate) && this.duplicateCheck(candidate)) {
 			candidateDao.save(candidate);
+			return new SuccessResult("Employer added.");
 		} else {
-			System.out.println("User is not valid.");
+			return new ErrorResult("Employer already exists.");
 		}
 	}
 
 	@Override
 	public boolean duplicateCheck(Candidate candidate) {
-		for (Candidate user : this.getAll()) {
+		for (Candidate user : this.candidateDao.findAll()) {
 			if (user.getEmail() == candidate.getEmail() || user.getIdentityNumber() == candidate.getIdentityNumber()) {
 				System.out.println("User email or identity number already exists.");
 				return false;

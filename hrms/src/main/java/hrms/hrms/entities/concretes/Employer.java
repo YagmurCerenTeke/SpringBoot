@@ -3,17 +3,25 @@ package hrms.hrms.entities.concretes;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper=false)
 @Entity
 @Table(name = "Employer")
-public class Employer {
+public class Employer{
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
@@ -34,21 +42,5 @@ public class Employer {
 
 	@Column(name = "password")
 	private String password;
-
-	public Employer() {
-		super();
-	}
-
-	public Employer(int id, String companyName, String website, String email, int birthYear, String phone,
-			String password) {
-		super();
-		this.id = id;
-		this.companyName = companyName;
-		this.website = website;
-		this.email = email;
-		this.birthYear = birthYear;
-		this.phone = phone;
-		this.password = password;
-	}
 
 }

@@ -1,19 +1,27 @@
 package hrms.hrms.entities.concretes;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper=false)
 @Entity
 @Table(name="Candidates")
-public class Candidate {
+public class Candidate{
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	
@@ -34,22 +42,6 @@ public class Candidate {
 	
 	@Column(name = "password")
 	private String password;
-	
-	public Candidate() {
-		super();
-	}
-
-	public Candidate(int id, String firstName, String lastName, String identityNumber, int birthYear, String email,
-			String password) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.identityNumber = identityNumber;
-		this.birthYear = birthYear;
-		this.email = email;
-		this.password = password;
-	}
 
 }
 

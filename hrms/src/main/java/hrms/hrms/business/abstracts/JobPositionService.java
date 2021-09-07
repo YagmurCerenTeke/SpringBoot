@@ -2,14 +2,22 @@ package hrms.hrms.business.abstracts;
 
 import java.util.List;
 
+import hrms.hrms.core.utilities.results.DataResult;
+import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.entities.concretes.JobPosition;
 
 
 public interface JobPositionService {
 
-	List<JobPosition> getAll();
+	DataResult<List<JobPosition>> getAll();
 	
-	void add(JobPosition jobPosition);
+	Result add(JobPosition jobPosition);
 
 	boolean duplicateCheck(JobPosition jobPosition);
+	
+	DataResult<List<String>> findAllByJobPositionName();
+	
+	DataResult<List<JobPosition>> findAllByIsActive();
+	
+	DataResult<List<JobPosition>> findAllOrderedByDeadline();
 }
