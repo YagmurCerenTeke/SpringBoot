@@ -15,12 +15,11 @@ import hrms.hrms.dataAccess.abstracts.JobPositionDao;
 
 import hrms.hrms.entities.concretes.JobPosition;
 
-
 @Service
 public class JobPositionManager implements JobPositionService {
 
 	JobPositionDao jobPositionDao;
-	
+
 	@Autowired
 	public JobPositionManager(JobPositionDao jobPositionDao) {
 		super();
@@ -29,14 +28,14 @@ public class JobPositionManager implements JobPositionService {
 
 	@Override
 	public DataResult<List<JobPosition>> getAll() {
-		return new SuccessDataResult<List<JobPosition>>
-		(this.jobPositionDao.findAll(),"Job positions listed.");
+		return new SuccessDataResult<List<JobPosition>>(this.jobPositionDao.findAll(), "Job positions listed.");
 	}
 
 	@Override
 	public Result add(JobPosition jobPosition) {
-		if(this.duplicateCheck(jobPosition)) {
+		if (this.duplicateCheck(jobPosition)) {
 			this.jobPositionDao.save(jobPosition);
+
 			return new SuccessResult("Position added.");
 		}
 		return new ErrorResult("Position already exists.");
@@ -44,32 +43,30 @@ public class JobPositionManager implements JobPositionService {
 
 	@Override
 	public boolean duplicateCheck(JobPosition jobPosition) {
-		for (JobPosition user : this.jobPositionDao.findAll()) {
-			if (user.getName() == jobPosition.getName()) {
-				System.out.println("Position already exists.");
-				return false;
+			for (JobPosition user : this.jobPositionDao.findAll()) {
+				if (user.getName() == jobPosition.getName()) {
+					System.out.println("Position already exists.");
+					return false;
+				}
 			}
-		}
+
 		return true;
 	}
 
 	@Override
 	public DataResult<List<String>> findAllByJobPositionName() {
-		return new SuccessDataResult<List<String>>
-		(this.jobPositionDao.findAllByJobPositionName(), "Data listelendi.");
+		return new SuccessDataResult<List<String>>(this.jobPositionDao.findAllByJobPositionName(), "Data listelendi.");
 	}
 
 	@Override
 	public DataResult<List<JobPosition>> findAllByIsActive() {
-		return new SuccessDataResult<List<JobPosition>>
-		(this.jobPositionDao.findAllByIsActive(), "Data listelendi.");
+		return new SuccessDataResult<List<JobPosition>>(this.jobPositionDao.findAllByIsActive(), "Data listelendi.");
 	}
 
 	@Override
 	public DataResult<List<JobPosition>> findAllOrderedByDeadline() {
-		return new SuccessDataResult<List<JobPosition>>
-		(this.jobPositionDao.findAllOrderedByDeadline(), "Data listelendi.");
+		return new SuccessDataResult<List<JobPosition>>(this.jobPositionDao.findAllOrderedByDeadline(),
+				"Data listelendi.");
 	}
 
 }
-

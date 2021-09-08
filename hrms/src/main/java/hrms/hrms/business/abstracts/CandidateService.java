@@ -14,6 +14,5 @@ public interface CandidateService {
 	Result add(Candidate candidate);
 	
 	boolean duplicateCheck(Candidate candidate);
-	
-	
+		
 }

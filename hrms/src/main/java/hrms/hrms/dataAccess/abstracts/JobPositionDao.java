@@ -13,7 +13,7 @@ public interface JobPositionDao extends JpaRepository<JobPosition, Integer> {
 	@Query("Select name from JobPosition")
 	List<String> findAllByJobPositionName();
 	
-	@Query("From JobPosition where isActive = active")
+	@Query("From JobPosition where is_active = 'true'")
 	List<JobPosition> findAllByIsActive();
 	
 	@Query("From JobPosition order by deadline")

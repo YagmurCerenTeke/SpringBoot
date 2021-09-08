@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -25,30 +27,31 @@ public class JobPosition {
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "name")
+	@Column(name = "name", nullable = false)
 	private String name;
 
-	@Column(name = "details")
+	@Column(name = "details", nullable = false)
 	private String details;
 	
-	@Column(name = "employerId")
-	private int employerId;
+	@ManyToOne()
+	@JoinColumn(name = "Employer_id")
+	private Employer employer;
 	
-	@Column(name = "city")
+	@Column(name = "city", nullable = false)
 	private String city; 
 	
-	@Column(name = "numberOfCandidatesToHire")
+	@Column(name = "numberOfCandidatesToHire", nullable = false)
 	private int numberOfCandidatesToHire;
 	
-	@Column(name = "salaryMax")
+	@Column(name = "salaryMax", nullable = false)
 	private int salaryMax;
 	
-	@Column(name = "salaryMin")
+	@Column(name = "salaryMin", nullable = false)
 	private int salaryMin;
 
-	@Column(name = "deadline")
+	@Column(name = "deadline", nullable = false)
 	private String deadline;
 	
-	@Column(name = "isActive")
-	private String isActive;
+	@Column(name = "isActive", nullable = false)
+	private boolean isActive;
 }
